@@ -1,0 +1,2 @@
+export const UPDATE_EVENTKEY = "UPDATE_EVENTKEY";
+export const CHANGE_THEME = "CHANGE_THEME";
