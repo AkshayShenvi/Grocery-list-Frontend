@@ -2,6 +2,10 @@
   "name": "grocery-list-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.13.7",
+    "node": "12.18.3"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
