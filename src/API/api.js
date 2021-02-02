@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const addItem = async (lid,input,username,listname,setOpen,fetchListItems,setErrStatus,setMessage) => {
     await axios
-      .post("http://localhost:3000/additem", {
+      .post("/additem", {
         id: lid,
         itemname: input,
         username: username,

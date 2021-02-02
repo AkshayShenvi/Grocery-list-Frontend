@@ -14,7 +14,7 @@ import {
   useRouteMatch,
   useHistory,
 } from "react-router-dom";
-require("dotenv").config();
+// require("dotenv").config();
 const axios = require("axios");
 // const url = "http://" + process.env.DATA_URL + ":" + process.env.PORT;
 function App({ auth }) {
