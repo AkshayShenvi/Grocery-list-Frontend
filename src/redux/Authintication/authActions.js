@@ -28,7 +28,7 @@ export const userloading = () => {
 export const registerUser = (userData, history) => {
   return (dispatch) => {
     axios
-      .post("/api/users/register", userData)
+      .post("https://grocery-list-app-backend.herokuapp.com/api/users/register", userData)
       .then((res) => {
         history.push("/login");
       })
@@ -43,7 +43,7 @@ export const loginUser = (userData) => {
   
   return (dispatch) => {
     axios
-      .post("/api/users/login", userData)
+      .post("https://grocery-list-app-backend.herokuapp.com/api/users/login", userData)
       .then((res) => {
         // console.log(res.data)
         const { token } = res.data;
