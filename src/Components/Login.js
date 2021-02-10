@@ -10,7 +10,7 @@ function Login() {
       method: "POST",
       data: { username: userId, password: pass },
       withCredentials: true,
-      url: "/login",
+      url: "https://grocery-list-app-backend.herokuapp.com/login",
     }).then((res) => {
       console.log(res);
     });

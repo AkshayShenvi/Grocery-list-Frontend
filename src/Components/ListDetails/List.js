@@ -68,7 +68,7 @@ function List({
   const addItem = async () => {
     // console.log(username)
     await axios
-      .post("/listdetails/additem", {
+      .post("https://grocery-list-app-backend.herokuapp.com/listdetails/additem", {
         listid: lid,
         itemname: input,
         username: username,
@@ -89,7 +89,7 @@ function List({
   };
   const deleteItem = async (itemId) => {
     await axios
-      .put("/listdetails/deleteitem", {
+      .put("https://grocery-list-app-backend.herokuapp.com/listdetails/deleteitem", {
         listid: lid,
         id: itemId,
       })
@@ -124,7 +124,7 @@ function List({
   const fetchOrderdList = async () => {
     // console.log(lid);
     await axios
-      .get("/listdetails/orderedlist", {
+      .get("https://grocery-list-app-backend.herokuapp.com/listdetails/orderedlist", {
         params: {
           listid: lid,
           user: username,
@@ -138,7 +138,7 @@ function List({
 
   const checkItem = async (itemId, listName) => {
     await axios
-      .patch("/listdetails/checkeditem", {
+      .patch("https://grocery-list-app-backend.herokuapp.com/listdetails/checkeditem", {
         listid: lid,
         itemid: itemId,
         listname: listName,
@@ -159,7 +159,7 @@ function List({
   };
   const addToOrdered = async (lid) => {
     await axios
-      .patch("/listdetails/ordered", {
+      .patch("https://grocery-list-app-backend.herokuapp.com/listdetails/ordered", {
         listid: lid,
       })
       .then((res) => {

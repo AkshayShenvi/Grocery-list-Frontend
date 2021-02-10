@@ -19,7 +19,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   // const [selectedUser, setSelecteduser] = useState([]);
   const updateListUsers = (listuser) => {
     axios
-      .patch("/lists/updatelistusers", {
+      .patch("https://grocery-list-app-backend.herokuapp.com/lists/updatelistusers", {
         listid: list.id,
         listusers: listuser,
       })
@@ -34,7 +34,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getAllUsers = () => {
     axios
-      .get("/api/users/getusers", {})
+      .get("https://grocery-list-app-backend.herokuapp.com/api/users/getusers", {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== auth.user.id);
 
@@ -46,7 +46,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getListUsers = () => {
     axios
-      .get("/lists/getlistusers", {
+      .get("https://grocery-list-app-backend.herokuapp.com/lists/getlistusers", {
         params: {
           listid: list.id,
         },

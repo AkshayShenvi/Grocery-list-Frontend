@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const addItem = async (lid,input,username,listname,setOpen,fetchListItems,setErrStatus,setMessage) => {
     await axios
-      .post("/additem", {
+      .post("https://grocery-list-app-backend.herokuapp.com/additem", {
         id: lid,
         itemname: input,
         username: username,

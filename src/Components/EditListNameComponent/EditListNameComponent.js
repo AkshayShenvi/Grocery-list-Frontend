@@ -25,7 +25,7 @@ function EditListNameComponent({
   const [listName, setListName] = useState("");
   function changeListName() {
     axios
-      .patch("/lists/updatelistname", {
+      .patch("https://grocery-list-app-backend.herokuapp.com/lists/updatelistname", {
         listid: list.id,
         listname: listName,
       })

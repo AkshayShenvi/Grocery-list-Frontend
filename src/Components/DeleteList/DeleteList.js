@@ -22,7 +22,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
   const [listName, setListName] = useState("");
   const deleteList = () => {
     axios
-      .delete("/lists/deletelist", {
+      .delete("https://grocery-list-app-backend.herokuapp.com/lists/deletelist", {
         params: {
           listid: list.id,
         },
