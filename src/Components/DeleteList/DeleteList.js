@@ -12,6 +12,8 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { fetchListNames } from "../../redux";
 
+var isEmpty = require("is-empty");
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -36,7 +38,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
     fetchListNames(username);
     handleClose();
   };
-
+  console.log(listName.toLowerCase() === list.listname.toLowerCase());
   return (
     <Dialog
       open={open}
@@ -77,7 +79,9 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
           <Button
             onClick={deleteList}
             disabled={
-              listName.toLowerCase() === list.listname.toLowerCase()
+              isEmpty(list)
+                ? true
+                : listName.toLowerCase() === list.listname.toLowerCase()
                 ? false
                 : true
             }
