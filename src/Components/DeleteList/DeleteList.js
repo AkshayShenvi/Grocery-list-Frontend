@@ -38,7 +38,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
     fetchListNames(username);
     handleClose();
   };
-  console.log(listName.toLowerCase() === list.listname.toLowerCase());
+  
   return (
     <Dialog
       open={open}
