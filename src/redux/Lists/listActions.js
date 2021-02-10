@@ -29,7 +29,7 @@ export const fetchListNames = (user) => {
     
     return (dispatch) => {
       dispatch(fetchListsRequests())
-    axios.get("/lists/getlistnames", {
+    axios.get("https://grocery-list-app-backend.herokuapp.com/lists/getlistnames", {
       params: {
         name: user,
       },
