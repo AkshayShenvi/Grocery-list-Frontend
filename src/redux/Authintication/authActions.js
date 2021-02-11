@@ -28,7 +28,10 @@ export const userloading = () => {
 export const registerUser = (userData, history) => {
   return (dispatch) => {
     axios
-      .post("https://grocery-list-app-backend.herokuapp.com/api/users/register", userData)
+      .post(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/register`,
+        userData
+      )
       .then((res) => {
         history.push("/login");
       })
@@ -40,10 +43,12 @@ export const registerUser = (userData, history) => {
 
 // Login - get user token
 export const loginUser = (userData) => {
-  
   return (dispatch) => {
     axios
-      .post("https://grocery-list-app-backend.herokuapp.com/api/users/login", userData)
+      .post(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/login`,
+        userData
+      )
       .then((res) => {
         // console.log(res.data)
         const { token } = res.data;
@@ -57,16 +62,15 @@ export const loginUser = (userData) => {
         // console.log(err.response.data)
         dispatch(setErrors(err.response.data));
       });
-  };  
+  };
 };
 
 // Log out user
 
 export const logoutUser = () => {
-  
   return (dispatch) => {
     localStorage.removeItem("jwtToken");
-    
+
     setAuthToken(false);
     dispatch(setCurrentUser({}));
   };

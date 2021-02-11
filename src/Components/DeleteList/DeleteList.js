@@ -22,7 +22,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
   const [listName, setListName] = useState("");
   const deleteList = () => {
     axios
-      .delete("https://grocery-list-app-backend.herokuapp.com/lists/deletelist", {
+      .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/deletelist`, {
         params: {
           listid: list.id,
         },
@@ -38,7 +38,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
     fetchListNames(username);
     handleClose();
   };
-  
+
   return (
     <Dialog
       open={open}

@@ -19,10 +19,13 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   // const [selectedUser, setSelecteduser] = useState([]);
   const updateListUsers = (listuser) => {
     axios
-      .patch("https://grocery-list-app-backend.herokuapp.com/lists/updatelistusers", {
-        listid: list.id,
-        listusers: listuser,
-      })
+      .patch(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistusers`,
+        {
+          listid: list.id,
+          listusers: listuser,
+        }
+      )
       .then((res) => {
         getListUsers();
         if (res.status !== 200) {
@@ -34,7 +37,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getAllUsers = () => {
     axios
-      .get("https://grocery-list-app-backend.herokuapp.com/api/users/getusers", {})
+      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/getusers`, {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== auth.user.id);
 
@@ -46,7 +49,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getListUsers = () => {
     axios
-      .get("https://grocery-list-app-backend.herokuapp.com/lists/getlistusers", {
+      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistusers`, {
         params: {
           listid: list.id,
         },
@@ -71,7 +74,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   useEffect(() => {
     getListUsers();
   }, [allUsers]);
-  
+
   return (
     <Dialog
       open={open}
