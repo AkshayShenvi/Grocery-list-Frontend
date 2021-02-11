@@ -68,7 +68,7 @@ function List({
   const addItem = async () => {
     // console.log(username)
     await axios
-      .post("https://grocery-list-app-backend.herokuapp.com/listdetails/additem", {
+      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
         listid: lid,
         itemname: input,
         username: username,
@@ -89,7 +89,7 @@ function List({
   };
   const deleteItem = async (itemId) => {
     await axios
-      .put("https://grocery-list-app-backend.herokuapp.com/listdetails/deleteitem", {
+      .put(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/deleteitem`, {
         listid: lid,
         id: itemId,
       })
@@ -124,12 +124,15 @@ function List({
   const fetchOrderdList = async () => {
     // console.log(lid);
     await axios
-      .get("https://grocery-list-app-backend.herokuapp.com/listdetails/orderedlist", {
-        params: {
-          listid: lid,
-          user: username,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/orderedlist`,
+        {
+          params: {
+            listid: lid,
+            user: username,
+          },
+        }
+      )
       .then((res) => {
         setOrderedList(res.data);
       })
@@ -138,11 +141,14 @@ function List({
 
   const checkItem = async (itemId, listName) => {
     await axios
-      .patch("https://grocery-list-app-backend.herokuapp.com/listdetails/checkeditem", {
-        listid: lid,
-        itemid: itemId,
-        listname: listName,
-      })
+      .patch(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
+        {
+          listid: lid,
+          itemid: itemId,
+          listname: listName,
+        }
+      )
       .then((res) => {
         // fetchNames();
         //----- fetchListItems(listname, lid);
@@ -159,7 +165,7 @@ function List({
   };
   const addToOrdered = async (lid) => {
     await axios
-      .patch("https://grocery-list-app-backend.herokuapp.com/listdetails/ordered", {
+      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/ordered`, {
         listid: lid,
       })
       .then((res) => {

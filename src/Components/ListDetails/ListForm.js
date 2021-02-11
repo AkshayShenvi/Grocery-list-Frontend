@@ -55,7 +55,7 @@ function ListForm({
   const handleToOrderItemAdd = (newItem, resolve) => {
     // console.log(newItem);
     axios
-      .post("https://grocery-list-app-backend.herokuapp.com/listdetails/additem", {
+      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
         listid: listId,
         username: username,
         itemname: newItem.item,
@@ -68,7 +68,7 @@ function ListForm({
   };
   async function fetchListItems(listId, itemType) {
     await axios
-      .get("https://grocery-list-app-backend.herokuapp.com/listdetails/getlist", {
+      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/getlist`, {
         params: {
           listid: listId,
           listtype: itemType,
@@ -95,11 +95,14 @@ function ListForm({
       console.log("Empty List");
     } else {
       await axios
-        .patch("https://grocery-list-app-backend.herokuapp.com/listdetails/checkeditem", {
-          listid: listId,
-          items: listItems,
-          listtype: listType,
-        })
+        .patch(
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
+          {
+            listid: listId,
+            items: listItems,
+            listtype: listType,
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })

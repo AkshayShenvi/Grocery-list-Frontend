@@ -20,12 +20,12 @@ function EditListNameComponent({
   handleClose,
   list,
   fetchListNames,
-  username
+  username,
 }) {
   const [listName, setListName] = useState("");
   function changeListName() {
     axios
-      .patch("https://grocery-list-app-backend.herokuapp.com/lists/updatelistname", {
+      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistname`, {
         listid: list.id,
         listname: listName,
       })
@@ -34,10 +34,10 @@ function EditListNameComponent({
           console.log("error");
         } else {
           console.log("Success");
-          }
-          
-          fetchListNames(username);
-          handleClose()
+        }
+
+        fetchListNames(username);
+        handleClose();
       });
   }
   useEffect(() => {

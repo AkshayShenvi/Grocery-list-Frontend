@@ -31,6 +31,8 @@ import {
 } from "../redux";
 import { connect } from "react-redux";
 
+require("dotenv").config();
+
 function Navigation({
   isdark,
   evekey,
@@ -40,6 +42,7 @@ function Navigation({
   setCurrentUser,
   logoutUser,
 }) {
+  
   const history = useHistory();
   function darkMode() {
     if (isdark) {
@@ -124,7 +127,7 @@ function Navigation({
         <Switch checked={isdark} onChange={darkModeSwitch} color="primary" />
       </Navbar>
 
-      <RouterSwitch >
+      <RouterSwitch>
         <Route path="/login">
           <SignIn />
         </Route>
