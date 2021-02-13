@@ -10,7 +10,7 @@ function Login() {
       method: "POST",
       data: { username: userId, password: pass },
       withCredentials: true,
-      url: `/login`,
+      url: `${process.env.REACT_APP_BACKEND_ENDPOINT}/login`,
     }).then((res) => {
       console.log(res);
     });

@@ -22,7 +22,7 @@ function DeleteList({ open, handleClose, list, username, fetchListNames }) {
   const [listName, setListName] = useState("");
   const deleteList = () => {
     axios
-      .delete(`/lists/deletelist`, {
+      .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/deletelist`, {
         params: {
           listid: list.id,
         },
