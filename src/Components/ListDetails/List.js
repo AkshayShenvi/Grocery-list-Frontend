@@ -68,7 +68,7 @@ function List({
   const addItem = async () => {
     // console.log(username)
     await axios
-      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+      .post(`/listdetails/additem`, {
         listid: lid,
         itemname: input,
         username: username,
@@ -89,7 +89,7 @@ function List({
   };
   const deleteItem = async (itemId) => {
     await axios
-      .put(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/deleteitem`, {
+      .put(`/listdetails/deleteitem`, {
         listid: lid,
         id: itemId,
       })
@@ -124,15 +124,12 @@ function List({
   const fetchOrderdList = async () => {
     // console.log(lid);
     await axios
-      .get(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/orderedlist`,
-        {
-          params: {
-            listid: lid,
-            user: username,
-          },
-        }
-      )
+      .get(`/listdetails/orderedlist`, {
+        params: {
+          listid: lid,
+          user: username,
+        },
+      })
       .then((res) => {
         setOrderedList(res.data);
       })
@@ -141,14 +138,11 @@ function List({
 
   const checkItem = async (itemId, listName) => {
     await axios
-      .patch(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
-        {
-          listid: lid,
-          itemid: itemId,
-          listname: listName,
-        }
-      )
+      .patch(`/listdetails/checkeditem`, {
+        listid: lid,
+        itemid: itemId,
+        listname: listName,
+      })
       .then((res) => {
         // fetchNames();
         //----- fetchListItems(listname, lid);
@@ -165,7 +159,7 @@ function List({
   };
   const addToOrdered = async (lid) => {
     await axios
-      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/ordered`, {
+      .patch(`/listdetails/ordered`, {
         listid: lid,
       })
       .then((res) => {

@@ -25,7 +25,7 @@ function EditListNameComponent({
   const [listName, setListName] = useState("");
   function changeListName() {
     axios
-      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistname`, {
+      .patch(`/lists/updatelistname`, {
         listid: list.id,
         listname: listName,
       })
