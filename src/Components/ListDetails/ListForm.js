@@ -55,7 +55,7 @@ function ListForm({
   const handleToOrderItemAdd = (newItem, resolve) => {
     // console.log(newItem);
     axios
-      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+      .post(`/listdetails/additem`, {
         listid: listId,
         username: username,
         itemname: newItem.item,
@@ -68,7 +68,7 @@ function ListForm({
   };
   async function fetchListItems(listId, itemType) {
     await axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/getlist`, {
+      .get(`/listdetails/getlist`, {
         params: {
           listid: listId,
           listtype: itemType,
@@ -95,14 +95,11 @@ function ListForm({
       console.log("Empty List");
     } else {
       await axios
-        .patch(
-          `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
-          {
-            listid: listId,
-            items: listItems,
-            listtype: listType,
-          }
-        )
+        .patch(`/listdetails/checkeditem`, {
+          listid: listId,
+          items: listItems,
+          listtype: listType,
+        })
         .then((res) => {
           console.log(res.data);
         })

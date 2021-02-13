@@ -19,13 +19,10 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   // const [selectedUser, setSelecteduser] = useState([]);
   const updateListUsers = (listuser) => {
     axios
-      .patch(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistusers`,
-        {
-          listid: list.id,
-          listusers: listuser,
-        }
-      )
+      .patch(`/lists/updatelistusers`, {
+        listid: list.id,
+        listusers: listuser,
+      })
       .then((res) => {
         getListUsers();
         if (res.status !== 200) {
@@ -37,7 +34,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getAllUsers = () => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/getusers`, {})
+      .get(`/api/users/getusers`, {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== auth.user.id);
 
@@ -49,7 +46,7 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   };
   const getListUsers = () => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistusers`, {
+      .get(`/lists/getlistusers`, {
         params: {
           listid: list.id,
         },
