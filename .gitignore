@@ -4,4 +4,3 @@
 #Frontend
 /node_modules/*
 /.env
-*.log

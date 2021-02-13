@@ -22,7 +22,7 @@ export default function CreateListDialogComponent({ open, handleClose, user }) {
   const [selectedUser, setSelecteduser] = useState([]);
   const getUsers = () => {
     axios
-      .get("/api/users/getusers", {})
+      .get("https://grocery-list-app-backend.herokuapp.com/api/users/getusers", {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== user.id);
 
@@ -34,7 +34,7 @@ export default function CreateListDialogComponent({ open, handleClose, user }) {
   };
   const createList = () => {
     axios
-      .post("/lists/createlist", {
+      .post("https://grocery-list-app-backend.herokuapp.com/lists/createlist", {
         users: [{ _id: user.id, name: user.name }, ...selectedUser],
         listname: newListName,
       })

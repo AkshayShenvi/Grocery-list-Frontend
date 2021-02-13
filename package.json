@@ -53,5 +53,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://grocery-list-app-backend.herokuapp.com"
+  "proxy": {
+    "origin": "https://grocery-list-app-backend.herokuapp.com"
+  }
 }

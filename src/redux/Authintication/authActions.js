@@ -29,7 +29,7 @@ export const registerUser = (userData, history) => {
   return (dispatch) => {
     axios
       .post(
-        `/api/users/register`,
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/register`,
         userData
       )
       .then((res) => {
@@ -46,7 +46,7 @@ export const loginUser = (userData) => {
   return (dispatch) => {
     axios
       .post(
-        `/api/users/login`,
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/login`,
         userData
       )
       .then((res) => {

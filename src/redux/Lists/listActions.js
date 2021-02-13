@@ -29,7 +29,7 @@ export const fetchListNames = (user) => {
   return (dispatch) => {
     dispatch(fetchListsRequests());
     axios
-      .get(`/lists/getlistnames`, {
+      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistnames`, {
         params: {
           name: user,
         },
