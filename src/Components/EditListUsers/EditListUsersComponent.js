@@ -18,14 +18,23 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
   const [listUsers, setListUsers] = useState([]);
   // const [selectedUser, setSelecteduser] = useState([]);
   const updateListUsers = (listuser) => {
-    axios
-      .patch(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistusers`,
-        {
-          listid: list.id,
-          listusers: listuser,
-        }
-      )
+    axios({
+      method: "patch",
+      url: "/lists/updatelistusers",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
+        listid: list.id,
+        listusers: listuser,
+      },
+    })
+      // axios
+      //   .patch(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistusers`,
+      //     {
+      //       listid: list.id,
+      //       listusers: listuser,
+      //     }
+      //   )
       .then((res) => {
         getListUsers();
         if (res.status !== 200) {
@@ -36,8 +45,13 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
       });
   };
   const getAllUsers = () => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/getusers`, {})
+    axios({
+      method: "get",
+      url: "/api/users/getusers",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+    })
+      // axios
+      //   .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/getusers`, {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== auth.user.id);
 
@@ -48,12 +62,20 @@ function EditListUsersComponent({ open, handleClose, list, auth }) {
       });
   };
   const getListUsers = () => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistusers`, {
-        params: {
-          listid: list.id,
-        },
-      })
+    axios({
+      method: "get",
+      url: "/lists/getlistusers",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      params: {
+        listid: list.id,
+      },
+    })
+      // axios
+      //   .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistusers`, {
+      //     params: {
+      //       listid: list.id,
+      //     },
+      //   })
       .then((res) => {
         const listusers = res.data.listUsers;
         setListUsers(listusers);

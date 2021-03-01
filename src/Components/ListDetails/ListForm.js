@@ -52,14 +52,24 @@ function ListForm({
   const [addToCart, setAddToCart] = useState([]);
   const [toOrderSelected, setToOrderSelected] = useState([]);
   const [addToCartSelected, setaddToCartSelected] = useState([]);
-  const handleToOrderItemAdd = (newItem, resolve) => {
+  const handleToOrderItemAdd = async (newItem, resolve) => {
     // console.log(newItem);
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+    await axios({
+      method: "post",
+      url: "/listdetails/additem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         listid: listId,
         username: username,
         itemname: newItem.item,
-      })
+      },
+    })
+      // axios
+      //   .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+      //     listid: listId,
+      //     username: username,
+      //     itemname: newItem.item,
+      //   })
       .then((res) => {
         console.log(res.data);
         fetchListItems(listId, "To Order");
@@ -67,13 +77,22 @@ function ListForm({
     resolve();
   };
   async function fetchListItems(listId, itemType) {
-    await axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/getlist`, {
-        params: {
-          listid: listId,
-          listtype: itemType,
-        },
-      })
+    await axios({
+      method: "get",
+      url: "/listdetails/getlist",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      params: {
+        listid: listId,
+        listtype: itemType,
+      },
+    })
+      // await axios
+      //   .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/getlist`, {
+      //     params: {
+      //       listid: listId,
+      //       listtype: itemType,
+      //     },
+      //   })
       .then((res) => {
         if (res.data[0].items.length === 0) {
           if (itemType === "To Order") {
@@ -94,15 +113,25 @@ function ListForm({
     if (listItems.length === 0) {
       console.log("Empty List");
     } else {
-      await axios
-        .patch(
-          `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
-          {
-            listid: listId,
-            items: listItems,
-            listtype: listType,
-          }
-        )
+      axios({
+        method: "patch",
+        url: "/listdetails/checkeditem",
+        baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+        data: {
+          listid: listId,
+          items: listItems,
+          listtype: listType,
+        },
+      })
+      // await axios
+      //   .patch(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
+      //     {
+      //       listid: listId,
+      //       items: listItems,
+      //       listtype: listType,
+      //     }
+      //   )
         .then((res) => {
           console.log(res.data);
         })

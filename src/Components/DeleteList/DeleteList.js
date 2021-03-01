@@ -21,12 +21,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function DeleteList({ open, handleClose, list, username, fetchListNames }) {
   const [listName, setListName] = useState("");
   const deleteList = () => {
-    axios
-      .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/deletelist`, {
-        params: {
-          listid: list.id,
-        },
-      })
+    axios({
+      method: "delete",
+      url: "/lists/deletelist",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      params: {
+        listid: list.id,
+      },
+    })
+      // axios
+      //   .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/deletelist`, {
+      //     params: {
+      //       listid: list.id,
+      //     },
+      //   })
       .then((res) => {
         if (res.status !== 200) {
           console.log("error");
