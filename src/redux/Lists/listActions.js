@@ -28,12 +28,20 @@ export const fetchListsError = (error) => {
 export const fetchListNames = (user) => {
   return (dispatch) => {
     dispatch(fetchListsRequests());
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistnames`, {
-        params: {
-          name: user,
-        },
-      })
+    axios({
+      method: "get",
+      url: "/lists/getlistnames",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      params: {
+        name: user,
+      },
+    })
+    // axios
+    //   .get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/getlistnames`, {
+    //     params: {
+    //       name: user,
+    //     },
+    //   })
       .then((response) => {
         let temp = [];
         for (let e of response.data) {
