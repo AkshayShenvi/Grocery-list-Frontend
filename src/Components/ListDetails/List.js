@@ -67,12 +67,22 @@ function List({
 
   const addItem = async () => {
     // console.log(username)
-    await axios
-      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+    await axios({
+      method: "post",
+      url: "/listdetails/additem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         listid: lid,
         itemname: input,
         username: username,
-      })
+      },
+    })
+      // await axios
+      //   .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
+      //     listid: lid,
+      //     itemname: input,
+      //     username: username,
+      //   })
       .then((res) => {
         // fetchNames();
         //---- fetchListItems(listname, lid);
@@ -88,11 +98,20 @@ function List({
       });
   };
   const deleteItem = async (itemId) => {
-    await axios
-      .put(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/deleteitem`, {
+    await axios({
+      method: "put",
+      url: "/listdetails/deleteitem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         listid: lid,
         id: itemId,
-      })
+      },
+    })
+      // await axios
+      //   .put(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/deleteitem`, {
+      //     listid: lid,
+      //     id: itemId,
+      //   })
       .then((res) => {
         // fetchNames();
         //-------- fetchListItems(listname, lid);
@@ -107,32 +126,28 @@ function List({
         }
       });
   };
-  // const fetchNames = async () => {
-  //   await axios
-  //     .get("http://localhost:3000/getlist", {
-  //       params: {
-  //         listname: listname,
-  //         listid: lid,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setListDetails(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const fetchOrderdList = async () => {
     // console.log(lid);
-    await axios
-      .get(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/orderedlist`,
-        {
-          params: {
-            listid: lid,
-            user: username,
-          },
-        }
-      )
+    axios({
+      method: "get",
+      url: "/listdetails/orderedlist",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      params: {
+        listid: lid,
+        user: username,
+      },
+    })
+      // await axios
+      //   .get(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/orderedlist`,
+      //     {
+      //       params: {
+      //         listid: lid,
+      //         user: username,
+      //       },
+      //     }
+      //   )
       .then((res) => {
         setOrderedList(res.data);
       })
@@ -140,15 +155,25 @@ function List({
   };
 
   const checkItem = async (itemId, listName) => {
-    await axios
-      .patch(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
-        {
-          listid: lid,
-          itemid: itemId,
-          listname: listName,
-        }
-      )
+    axios({
+      method: "patch",
+      url: "/listdetails/checkeditem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
+        listid: lid,
+        itemid: itemId,
+        listname: listName,
+      },
+    })
+      // await axios
+      //   .patch(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
+      //     {
+      //       listid: lid,
+      //       itemid: itemId,
+      //       listname: listName,
+      //     }
+      //   )
       .then((res) => {
         // fetchNames();
         //----- fetchListItems(listname, lid);
@@ -164,10 +189,18 @@ function List({
       });
   };
   const addToOrdered = async (lid) => {
-    await axios
-      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/ordered`, {
+    axios({
+      method: "patch",
+      url: "/listdetails/ordered",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         listid: lid,
-      })
+      },
+    })
+      // await axios
+      //   .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/ordered`, {
+      //     listid: lid,
+      //   })
       .then((res) => {
         // fetchNames();
         //---- fetchListItems(listname, lid);

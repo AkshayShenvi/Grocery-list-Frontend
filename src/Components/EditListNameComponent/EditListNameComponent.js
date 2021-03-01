@@ -24,11 +24,20 @@ function EditListNameComponent({
 }) {
   const [listName, setListName] = useState("");
   function changeListName() {
-    axios
-      .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistname`, {
+    axios({
+      method: "patch",
+      url: "/lists/updatelistname",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         listid: list.id,
         listname: listName,
-      })
+      },
+    })
+      // axios
+      //   .patch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/lists/updatelistname`, {
+      //     listid: list.id,
+      //     listname: listName,
+      //   })
       .then((res) => {
         if (res.status !== 200) {
           console.log("error");

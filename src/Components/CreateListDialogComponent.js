@@ -21,8 +21,13 @@ export default function CreateListDialogComponent({ open, handleClose, user }) {
   const [allUsers, setAllUsers] = useState([]);
   const [selectedUser, setSelecteduser] = useState([]);
   const getUsers = () => {
-    axios
-      .get("https://grocery-list-app-backend.herokuapp.com/api/users/getusers", {})
+    axios({
+      method: "get",
+      url: "/api/users/getusers",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+    })
+      // axios
+      //   .get("https://grocery-list-app-backend.herokuapp.com/api/users/getusers", {})
       .then((res) => {
         const data = res.data.filter((users) => users._id !== user.id);
 
@@ -32,12 +37,21 @@ export default function CreateListDialogComponent({ open, handleClose, user }) {
         console.log(err);
       });
   };
-  const createList = () => {
-    axios
-      .post("https://grocery-list-app-backend.herokuapp.com/lists/createlist", {
+  const createList = async () => {
+    await axios({
+      method: "post",
+      url: "/lists/createlist",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
         users: [{ _id: user.id, name: user.name }, ...selectedUser],
         listname: newListName,
-      })
+      },
+    })
+      // axios
+      //   .post("https://grocery-list-app-backend.herokuapp.com/lists/createlist", {
+      //     users: [{ _id: user.id, name: user.name }, ...selectedUser],
+      //     listname: newListName,
+      //   })
       .then((res) => {
         setNewListName("");
         handleClose();
@@ -89,7 +103,6 @@ export default function CreateListDialogComponent({ open, handleClose, user }) {
         <ButtonGroup
           // size="large"
           disableElevation
-          
           color="primary"
           aria-label="large outlined primary button group"
         >
