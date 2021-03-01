@@ -27,11 +27,17 @@ export const userloading = () => {
 
 export const registerUser = (userData, history) => {
   return (dispatch) => {
-    axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/register`,
-        userData
-      )
+    axios({
+      method: "post",
+      url: "/api/users/register",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: userData,
+    })
+      // axios
+      //   .post(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/register`,
+      //     userData
+      //   )
       .then((res) => {
         history.push("/login");
       })
@@ -44,11 +50,17 @@ export const registerUser = (userData, history) => {
 // Login - get user token
 export const loginUser = (userData) => {
   return (dispatch) => {
-    axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/login`,
-        userData
-      )
+    axios({
+      method: "post",
+      url: "/api/users/login",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: userData,
+    })
+      // axios
+      //   .post(
+      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/users/login`,
+      //     userData
+      //   )
       .then((res) => {
         // console.log(res.data)
         const { token } = res.data;
