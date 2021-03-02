@@ -123,15 +123,15 @@ function ListForm({
           listtype: listType,
         },
       })
-      // await axios
-      //   .patch(
-      //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
-      //     {
-      //       listid: listId,
-      //       items: listItems,
-      //       listtype: listType,
-      //     }
-      //   )
+        // await axios
+        //   .patch(
+        //     `${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/checkeditem`,
+        //     {
+        //       listid: listId,
+        //       items: listItems,
+        //       listtype: listType,
+        //     }
+        //   )
         .then((res) => {
           console.log(res.data);
         })
@@ -139,6 +139,32 @@ function ListForm({
           console.log(err);
         });
     }
+  }
+  async function handleRowUpdate(newData, resolve) {
+    const itemId = newData._id;
+    const itemName = newData.item;
+    await axios({
+      method: "patch",
+      url: "/listdetails/updateitem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
+        listid: listId,
+        itemid: itemId,
+        item: itemName,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        if (newData.listtype === "Added to Cart") {
+          fetchListItems(listId, "Added to Cart");
+        } else {
+          fetchListItems(listId, "To Order");
+        }
+        resolve();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function checkItems(listType) {
     if (listType === "Added to Cart") {
@@ -210,6 +236,7 @@ function ListForm({
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve) => {
                 console.log(newData);
+                handleRowUpdate(newData, resolve);
               }),
           }}
           options={{
