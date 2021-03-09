@@ -64,17 +64,13 @@ function ListForm({
         itemname: newItem.item,
       },
     })
-      // axios
-      //   .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/listdetails/additem`, {
-      //     listid: listId,
-      //     username: username,
-      //     itemname: newItem.item,
-      //   })
+      
       .then((res) => {
         console.log(res.data);
         fetchListItems(listId, "To Order");
+        resolve();
       });
-    resolve();
+   
   };
   async function fetchListItems(listId, itemType) {
     await axios({
