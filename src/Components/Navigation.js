@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 // import Nav from "react-bootstrap";
 import { Switch } from "@material-ui/core";
-
+import ROUTES from "./routes";
 import {
   BrowserRouter as Router,
   Switch as RouterSwitch,
@@ -100,7 +100,20 @@ function Navigation({
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          {auth.isAuthenticated ? (
+          {ROUTES.map((route) => {
+            if (route.key) {
+              return (
+                <Nav variant="pills " activeKey={3}>
+                  <Nav.Item>
+                    <Nav.Link eventKey={3} as={Link} to={route.path}>
+                      {route.key}
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+              );
+            } else return null;
+          })}
+          {/* {auth.isAuthenticated ? (
             <Nav variant="pills " activeKey={3}>
               <Nav.Item>
                 <Nav.Link eventKey={3} as={Link} to="/logout">
@@ -121,7 +134,7 @@ function Navigation({
                 </Nav.Link>
               </Nav.Item>
             </Nav>
-          )}
+          )} */}
         </Navbar.Collapse>
         <Switch checked={isdark} onChange={darkModeSwitch} color="primary" />
         <h6>v 1.1</h6>
