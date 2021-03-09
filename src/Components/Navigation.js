@@ -42,7 +42,6 @@ function Navigation({
   setCurrentUser,
   logoutUser,
 }) {
-  
   const history = useHistory();
   function darkMode() {
     if (isdark) {
@@ -125,6 +124,7 @@ function Navigation({
           )}
         </Navbar.Collapse>
         <Switch checked={isdark} onChange={darkModeSwitch} color="primary" />
+        <h6>v 1.1</h6>
       </Navbar>
 
       <RouterSwitch>
