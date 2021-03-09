@@ -235,9 +235,10 @@ function ListForm({
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve) => {
-                console.log(newData);
+                
                 handleRowUpdate(newData, resolve);
               }),
+            
           }}
           options={{
             selection: true,
