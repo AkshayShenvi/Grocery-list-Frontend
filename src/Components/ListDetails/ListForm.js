@@ -154,7 +154,6 @@ function ListForm({
       },
     })
       .then((res) => {
-        console.log(res.data);
         if (newData.listtype === "Added to Cart") {
           fetchListItems(listId, "Added to Cart");
         } else {
@@ -164,6 +163,30 @@ function ListForm({
       })
       .catch((err) => {
         console.log(err);
+      });
+  }
+  async function handleRowDelete(oldData, resolve, reject) {
+    const itemId = oldData._id;
+    await axios({
+      method: "put",
+      url: "/listdetails/deleteitem",
+      baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
+      data: {
+        listid: listId,
+        itemid: itemId,
+      },
+    })
+      .then((res) => {
+        if (oldData.listtype === "Added to Cart") {
+          fetchListItems(listId, "Added to Cart");
+        } else {
+          fetchListItems(listId, "To Order");
+        }
+        resolve();
+      })
+      .catch((err) => {
+        console.log(err);
+        reject();
       });
   }
   function checkItems(listType) {
@@ -235,10 +258,12 @@ function ListForm({
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve) => {
-                
                 handleRowUpdate(newData, resolve);
               }),
-            
+            onRowDelete: (oldData) =>
+              new Promise((resolve, reject) => {
+                handleRowDelete(oldData, resolve, reject);
+              }),
           }}
           options={{
             selection: true,
